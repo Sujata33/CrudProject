@@ -3,6 +3,7 @@ using System;
 using CrudProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CrudProject.Migrations
 {
     [DbContext(typeof(FullStackDbContext))]
-    partial class FullStackDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240303043457_forth migration")]
+    partial class forthmigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,9 +60,6 @@ namespace CrudProject.Migrations
                     b.Property<string>("address")
                         .HasColumnType("text");
 
-                    b.Property<Guid>("bank_id")
-                        .HasColumnType("uuid");
-
                     b.Property<DateTime>("created_at")
                         .HasColumnType("timestamp with time zone");
 
@@ -77,20 +77,7 @@ namespace CrudProject.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("bank_id");
-
                     b.ToTable("Branches");
-                });
-
-            modelBuilder.Entity("CrudProject.Models.Branches", b =>
-                {
-                    b.HasOne("CrudProject.Models.Banks", "Banks")
-                        .WithMany()
-                        .HasForeignKey("bank_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Banks");
                 });
 #pragma warning restore 612, 618
         }

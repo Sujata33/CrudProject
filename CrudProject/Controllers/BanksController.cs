@@ -10,7 +10,7 @@ namespace CrudProject.Controllers
     public class BanksController : Controller
     {
         private readonly FullStackDbContext _fullStackDbContext;
-        private object viewBag;
+       
 
         public BanksController(FullStackDbContext fullStackDbContext)
         {
