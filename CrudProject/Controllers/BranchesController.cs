@@ -28,11 +28,14 @@ namespace CrudProject.Controllers
         public async Task<IActionResult> AddBranches([FromBody] Branches branchesRquest)
         {
             branchesRquest.id = Guid.NewGuid();
+            //branchesRquest.ifsc = string;
             await _fullStackDbContext.Branches.AddAsync(branchesRquest);
             await _fullStackDbContext.SaveChangesAsync();
 
             return Ok(branchesRquest);
         }
+
+        
 
         [HttpGet]
         [Route("{id:Guid}")]
@@ -46,7 +49,7 @@ namespace CrudProject.Controllers
             return Ok(branches);
         }
 
-        [HttpPut]
+        /*[HttpPut]
         [Route("{id:Guid}")]
         public async Task<IActionResult> UpdateBranches([FromRoute] Guid id, Branches updateBranchesRequest)
         {
@@ -61,6 +64,29 @@ namespace CrudProject.Controllers
             branches.ifsc = updateBranchesRequest.ifsc;
             branches.bank_id = updateBranchesRequest.bank_id;
 
+            await _fullStackDbContext.SaveChangesAsync();
+
+            return Ok(branches);
+        }*/
+
+
+        //public async Task<IActionResult> UpdateBranches([FromRoute] string ifsc, Branches updateBranchesRequest)
+        [HttpPut]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> UpdateBranches([FromRoute] Guid id, Branches updateBranchesRequest)
+        {
+            //var branches = await _fullStackDbContext.Branches.FindAsync(ifsc);
+            var branches = await _fullStackDbContext.Branches.FindAsync(id);
+            if (branches == null)
+            {
+                return NotFound();
+            }
+            branches.name = updateBranchesRequest.name;
+            branches.ref_code = updateBranchesRequest.ref_code;
+            branches.address = updateBranchesRequest.address;
+            branches.ifsc = updateBranchesRequest.ifsc;
+            branches.bank_id = updateBranchesRequest.bank_id;
+            branches.updated_at = updateBranchesRequest.updated_at;
             await _fullStackDbContext.SaveChangesAsync();
 
             return Ok(branches);

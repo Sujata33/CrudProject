@@ -57,6 +57,7 @@ namespace CrudProject.Controllers
             banks.name = updateBanksRequest.name;
             banks.ref_code = updateBanksRequest.ref_code;
             banks.short_name = updateBanksRequest.short_name;
+            banks.updated_at = updateBanksRequest.updated_at;
 
             await _fullStackDbContext.SaveChangesAsync();
 

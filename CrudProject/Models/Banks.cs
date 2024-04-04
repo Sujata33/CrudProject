@@ -10,7 +10,9 @@ namespace CrudProject.Models
         public String name { get; set; }
 
         public string short_name { get; set; }
-        
+
+        public string intigrated_yn { get; set; }
+
         public DateTime created_at { get; set; }
         public DateTime updated_at { get; set; }
 

@@ -31,6 +31,9 @@ namespace CrudProject.Migrations
                     b.Property<DateTime>("created_at")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("intigrated_yn")
+                        .HasColumnType("text");
+
                     b.Property<string>("name")
                         .HasColumnType("text");
 
